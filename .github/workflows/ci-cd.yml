@@ -34,6 +34,6 @@ jobs:
         run: |
           ./docker_hub_cleanner.sh $USERNAME $PASS $REPO
         env:
-          USERNAME: ${{secret.USERNAME}}
-          PASS: ${{secret.PASS}}
-          REPO: ${{secret.REPOSITORY_TO_CLEAN}}
+          USERNAME: ${{secrets.USERNAME}}
+          PASS: ${{secrets.PASS}}
+          REPO: ${{secrets.REPOSITORY_TO_CLEAN}}
