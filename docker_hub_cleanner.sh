@@ -6,9 +6,13 @@
 UNAME=$1
 UPASS=$2
 X=$3
+TOKEN=$4
 
-# get token to be able to talk to Docker Hub
-TOKEN=$(curl -s -H "Content-Type: application/json" -X POST -d '{"username": "'${UNAME}'", "password": "'${UPASS}'"}' https://hub.docker.com/v2/users/login/ | jq -r .token)
+if [ -z $TOKEN ];then
+     echo "Token var is empty, lets generate a new one"
+     # get token to be able to talk to Docker Hub
+     TOKEN=$(curl -s -H "Content-Type: application/json" -X POST -d '{"username": "'${UNAME}'", "password": "'${UPASS}'"}' https://hub.docker.com/v2/users/login/ | jq -r .token)
+fi
 
 #echo $TOKEN
 # get list of repos for that user account
