@@ -6,6 +6,8 @@
 UNAME=$1
 UPASS=$2
 X=$3
+#UPASS=$4
+MODE=$5
 
 if [ $UPASS == "NOPASS" ];then
      echo "Pass var is not use, lets generate a new one"
@@ -81,7 +83,10 @@ do
                   then
                         echo "This image '${UNAME}/${rep}:${tag}'  is older than $X days, deleting this  image."
                   #### Note! TO delete an image please uncomment below line.
-                  #### curl -s  -X DELETE  -H "Authorization: JWT ${TOKEN}" https://hub.docker.com/v2/repositories/${UNAME}/${rep}/tags/${tag}/
+                  if [ $MODE != "TEST" ];then
+                    echo "Lets delete the next tag!"
+                    curl -s  -X DELETE  -H "Authorization: JWT ${TOKEN}" https://hub.docker.com/v2/repositories/${UNAME}/${rep}/tags/${tag}/
+                  fi
                   else
                         echo "This image '${UNAME}/${rep}:${tag}' is within $X days time range, keeping this image."
                   fi
