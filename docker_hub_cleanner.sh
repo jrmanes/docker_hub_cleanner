@@ -6,11 +6,11 @@
 UNAME=$1
 UPASS=$2
 X=$3
-TOKEN=$4
 
-if [ -z $TOKEN ];then
-     echo "Token var is empty, lets generate a new one"
+if [ $UPASS == "NOPASS" ];then
+     echo "Pass var is not use, lets generate a new one"
      # get token to be able to talk to Docker Hub
+     UPASS=$4
      TOKEN=$(curl -s -H "Content-Type: application/json" -X POST -d '{"username": "'${UNAME}'", "password": "'${UPASS}'"}' https://hub.docker.com/v2/users/login/ | jq -r .token)
 fi
 
@@ -29,8 +29,6 @@ done
 echo
 sleep 5
 
-
-
 echo
 echo "Identifying and deleting images which are older than $X days in '${UNAME}' docker hub account."
 sleep 5
@@ -39,8 +37,6 @@ sleep 5
 #for i in  mysql mymongo
 
 for rep in ${REPO_LIST}
- 
-
 do
     # get total no. of images & their count for a repo
     Images=$(curl -s -H "Authorization: JWT ${TOKEN}" "https://hub.docker.com/v2/repositories/$UNAME/$rep/tags/")
