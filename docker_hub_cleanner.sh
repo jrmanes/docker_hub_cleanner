@@ -83,10 +83,12 @@ do
                   then
                         echo "This image '${UNAME}/${rep}:${tag}'  is older than $X days, deleting this  image."
                   #### Note! TO delete an image please uncomment below line.
-                  if [ $MODE != "TEST" ];then
-                    echo "Lets delete the next tag!"
-                    curl -s  -X DELETE  -H "Authorization: JWT ${TOKEN}" https://hub.docker.com/v2/repositories/${UNAME}/${rep}/tags/${tag}/
-                  fi
+                    if [ $MODE != "TEST" ];then
+                         echo "Lets delete the next tag!"
+                         curl -s  -X DELETE  -H "Authorization: JWT ${TOKEN}" https://hub.docker.com/v2/repositories/${UNAME}/${rep}/tags/${tag}/
+                    else
+                         echo "Test mode, not delting..."
+                    fi
                   else
                         echo "This image '${UNAME}/${rep}:${tag}' is within $X days time range, keeping this image."
                   fi
