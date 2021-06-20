@@ -1,11 +1,5 @@
 #!/bin/bash
 #Script will delete all images in all repositories of your docker hub account which are older than 'X' days
-set -e
-
-# set your username, password and no. of 'X' days value in below lines.
-#UNAME="YOUR_USERNAME"
-#UPASS="YOUR_PASSWORD"
-#X="YOUR_DAYS_VALUE"
 
 # pass username,password and no of 'X' days value from terminal as below line.
 # ./docker-images-remove-script.sh <username> <password> <30>
@@ -16,9 +10,7 @@ X=$3
 # get token to be able to talk to Docker Hub
 TOKEN=$(curl -s -H "Content-Type: application/json" -X POST -d '{"username": "'${UNAME}'", "password": "'${UPASS}'"}' https://hub.docker.com/v2/users/login/ | jq -r .token)
 
-
 #echo $TOKEN
-echo
 # get list of repos for that user account
 echo "List of Repositories in '${UNAME}' Docker Hub account."
 sleep 5
