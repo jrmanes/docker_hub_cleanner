@@ -87,7 +87,7 @@ do
                          echo "Lets delete the next tag!"
                          curl -s  -X DELETE  -H "Authorization: JWT ${TOKEN}" https://hub.docker.com/v2/repositories/${UNAME}/${rep}/tags/${tag}/
                     else
-                         echo "Test mode, not delting..."
+                         echo "Test mode, not deleting..."
                     fi
                   else
                         echo "This image '${UNAME}/${rep}:${tag}' is within $X days time range, keeping this image."

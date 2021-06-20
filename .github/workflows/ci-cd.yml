@@ -38,4 +38,4 @@ jobs:
           PASS: ${{secrets.PASS}}
           DAYS_FROM: ${{secrets.DAYS_FROM}}
           TOKEN: ${{secrets.TOKEN}}
-          MODE: TEST
+          MODE: PROD
